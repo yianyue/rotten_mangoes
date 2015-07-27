@@ -1,9 +1,10 @@
 RottenMangoes::Application.routes.draw do
 
-  get "movies/index"
-  get "movies/show"
-  get "movies/new"
-  get "movies/edit"
+  # get "movies/index"
+  # get "movies/show"
+  # get "movies/new"
+  # get "movies/edit"
+  
   resources :movies
   
   # The priority is based upon order of creation: first created -> highest priority.

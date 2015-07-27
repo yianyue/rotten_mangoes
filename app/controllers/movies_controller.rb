@@ -29,7 +29,6 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     if @movie.update_attributes(movie_params)
       redirect_to movie_path(@movie)
-      # what does passing @movie does?
     else
       render :edit
     end

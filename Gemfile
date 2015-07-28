@@ -37,6 +37,10 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'bcrypt-ruby', '3.1.2'
 
+# Use Carrierwave for image upload
+gem "rmagick"
+gem "carrierwave"
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

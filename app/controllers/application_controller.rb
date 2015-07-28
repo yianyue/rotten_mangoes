@@ -10,6 +10,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_access
+    if !current_user.admin
+      flash[:alert] = "You must be an admin to access this page"
+      redirect_to new_session_path
+    end
+  end
+
   protected
 
   def current_user

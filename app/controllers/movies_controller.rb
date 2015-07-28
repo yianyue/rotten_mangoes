@@ -1,5 +1,8 @@
 class MoviesController < ApplicationController
 
+  before_action :restrict_access
+  skip_before_action :restrict_access, only: [:index, :show]
+
   def index
     @movies = Movie.all
   end

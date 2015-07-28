@@ -2,6 +2,8 @@ module Admin
   
   class UsersController < ApplicationController
 
+    before_action :admin_access
+
     def index
       @users = User.all
     end

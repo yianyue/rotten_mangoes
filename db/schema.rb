@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728155358) do
+ActiveRecord::Schema.define(version: 20150728194708) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "title",              limit: 255
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150728155358) do
     t.datetime "updated_at",      null: false
     t.string   "firstname"
     t.string   "lastname"
+    t.boolean  "admin"
   end
 
 end

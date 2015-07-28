@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+(1..50).each do |i|
+  user = User.create!(firstname: "fn#{i}", lastname: "last#{i}", email: "email#{i}@gmail.com", password: "password#{i}", password_confirmation: "password#{i}")
+end

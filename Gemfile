@@ -41,6 +41,9 @@ gem 'bcrypt-ruby', '3.1.2'
 gem "rmagick"
 gem "carrierwave"
 
+# Use Kaminari for pagination
+gem 'kaminari'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

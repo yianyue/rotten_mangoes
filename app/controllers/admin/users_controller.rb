@@ -5,7 +5,7 @@ module Admin
     before_action :admin_access
 
     def index
-      @users = User.all
+      @users = User.page(params[:page]).per(10)
     end
   
     def new

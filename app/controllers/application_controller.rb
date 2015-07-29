@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def mock_user
+    # need to get current_user to return a specific user (through a get request)
+    
+  end
+
   helper_method :current_user
   
 end

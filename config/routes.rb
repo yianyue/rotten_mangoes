@@ -5,13 +5,12 @@ RottenMangoes::Application.routes.draw do
   end
   
   resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
 
   namespace :admin do
     resources :users
   end
-  
-  resources :sessions, only: [:new, :create, :destroy]
-  
+    
   root to: 'movies#index'
   
   # Example resource route (maps HTTP verbs to controller actions automatically):

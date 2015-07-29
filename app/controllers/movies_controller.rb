@@ -8,8 +8,6 @@ class MoviesController < ApplicationController
   end
 
   def search
-    title = params[:query][:title]
-    director = params[:query][:director]
     case params[:runtime].to_i
     when 0
       range = nil
@@ -22,11 +20,13 @@ class MoviesController < ApplicationController
       # TODO:
     end
 
-    @movies = Movie.where("lower(title) LIKE ?", "%#{title}%").where("lower(director) LIKE ?", "%#{director}%")
-    @movies = @movies.where(runtime_in_minutes:(range)) if range
+    query = params[:query]
+    query[:range] = range
+
+    @movies = Movie.search(query)
 
     if @movies.any?
-      flash.now.alert = "found #{@movies.size} movies with #{params[:runtime]}"
+      flash.now.alert = "found #{@movies.size} movies"
       # why doesn't notice work here?
       render :index
     else

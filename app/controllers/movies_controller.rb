@@ -9,7 +9,6 @@ class MoviesController < ApplicationController
 
   def search
     query = params[:query]
-    # range = params[:runtime]
     case params[:runtime].to_i
     when 0
       range = nil

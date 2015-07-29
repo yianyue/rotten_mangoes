@@ -40,6 +40,8 @@ module Admin
 
     def destroy
       @user = User.find(params[:id])
+      # Tell the UserMailer to send a welcome email after save
+      UserMailer.delete_email(@user).deliver_later
       @user.destroy
       redirect_to admin_users_path
     end

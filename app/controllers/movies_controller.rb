@@ -8,7 +8,8 @@ class MoviesController < ApplicationController
   end
 
   def search
-    query = params[:query]
+    title = params[:query][:title]
+    director = params[:query][:director]
     case params[:runtime].to_i
     when 0
       range = nil
@@ -21,7 +22,9 @@ class MoviesController < ApplicationController
       # TODO:
     end
 
-    @movies = Movie.where("(lower(title) LIKE ? OR lower(director) LIKE ?) ", "%#{query[:title]}%", "%#{query[:director]}%").where(runtime_in_minutes:(range))
+    @movies = Movie.where("lower(title) LIKE ?", "%#{title}%").where("lower(director) LIKE ?", "%#{director}%")
+    @movies = @movies.where(runtime_in_minutes:(range)) if range
+
     if @movies.any?
       flash.now.alert = "found #{@movies.size} movies with #{params[:runtime]}"
       # why doesn't notice work here?

@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_access
-    unless current_user && current_user.admin
+    # TODO: refactor this
+    unless (current_user && current_user.admin) || mock_user
       flash[:alert] = "You must be an admin to access this page"
       redirect_to new_session_path
     end
@@ -20,14 +21,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
+    return mock_user if mock_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def mock_user
-    # need to get current_user to return a specific user (through a get request)
-    
+    # find_by returns nil when id does not exist
+    @mock_user ||= User.find_by(id: session[:mock_id]) if session[:mock_id]     
   end
 
-  helper_method :current_user
+  helper_method :current_user, :mock_user
   
 end

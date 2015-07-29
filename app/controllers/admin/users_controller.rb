@@ -1,6 +1,6 @@
 module Admin
-  
   class UsersController < ApplicationController
+    # what about inhereting from UsersController? Wouldn't be super useful, since only new is the same
 
     before_action :admin_access
 
@@ -51,5 +51,4 @@ module Admin
     end
 
   end
-
 end

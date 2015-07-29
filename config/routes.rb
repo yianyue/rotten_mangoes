@@ -9,7 +9,10 @@ RottenMangoes::Application.routes.draw do
 
   namespace :admin do
     resources :users
+    get 'become_user/:id', to: 'admin#become_user', as: 'become_user'
+    get 'become_admin', to: 'admin#become_admin'
   end
+
     
   root to: 'movies#index'
   

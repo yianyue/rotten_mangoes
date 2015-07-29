@@ -18,8 +18,8 @@ class Movie < ActiveRecord::Base
   end
 
   def self.search(query) 
-    movies = self.where("lower(title) LIKE ?", "%#{query[:title]}%").where("lower(director) LIKE ?", "%#{query[:director]}%")
-    movies = self.where(runtime_in_minutes: query[:range]) if query[:range]
+    movies = self.where("lower(title) LIKE ? OR lower(director) LIKE ?", "%#{query[:keyword]}%", "%#{query[:keyword]}%")
+    movies = movies.where(runtime_in_minutes: query[:range]) if query[:range]
     return movies
   end
 

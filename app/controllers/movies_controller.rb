@@ -19,9 +19,7 @@ class MoviesController < ApplicationController
       range = 121..1000
       # TODO:
     end
-
-    query = params[:query]
-    query[:range] = range
+    query = {keyword: params[:keyword], range: range}
 
     @movies = Movie.search(query)
 

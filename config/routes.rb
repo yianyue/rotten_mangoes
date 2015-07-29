@@ -2,6 +2,9 @@ RottenMangoes::Application.routes.draw do
 
   resources :movies do
     resources :reviews, only: [:new, :create]
+    collection do
+      get 'search'
+    end
   end
   
   resources :users, only: [:new, :create]
@@ -11,6 +14,7 @@ RottenMangoes::Application.routes.draw do
     resources :users
     get 'become_user/:id', to: 'admin#become_user', as: 'become_user'
     get 'become_admin', to: 'admin#become_admin'
+    # does it make sense to name space the switch?
   end
 
     

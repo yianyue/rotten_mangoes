@@ -2,6 +2,7 @@ class Admin::AdminController < ApplicationController
 
   before_action :admin_access
   # change admin_access check
+  # or skip before?
 
   def become_user
     # return unless current_user.admin

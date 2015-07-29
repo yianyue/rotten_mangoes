@@ -9,26 +9,26 @@ class MoviesController < ApplicationController
 
   def search
     query = params[:query]
-
+    # range = params[:runtime]
     case params[:runtime].to_i
     when 0
-      range = 0
+      range = nil
     when 1
       range = 0...90
     when 2
       range = 90..120
     when 3
-      range = 120...1000
+      range = 121..1000
       # TODO:
     end
 
-    @movies = Movie.where("(lower(title) LIKE ? OR lower(director) LIKE ?) ", "%#{query[:title]}%", "%#{query[:director]}%").where(runtime_in_minutes: (range))
+    @movies = Movie.where("(lower(title) LIKE ? OR lower(director) LIKE ?) ", "%#{query[:title]}%", "%#{query[:director]}%").where(runtime_in_minutes:(range))
     if @movies.any?
-      flash.now.alert = "found #{@movies.size} movies with #{params[:query]}"
+      flash.now.alert = "found #{@movies.size} movies with #{params[:runtime]}"
       # why doesn't notice work here?
       render :index
     else
-      redirect_to movies_path, notice: "cannot find any movies with the given criteria #{params[:query]}"
+      redirect_to movies_path, notice: "cannot find any movies with the given criteria"
     end
   end
 

@@ -9,18 +9,18 @@ class Movie < ActiveRecord::Base
 
   validate :release_date_is_in_the_future
 
-  def self.search(query) 
-    movies = self.where("lower(title) LIKE ?", "%#{query[:title]}%").where("lower(director) LIKE ?", "%#{query[:director]}%")
-    movies = self.where(runtime_in_minutes: query[:range]) if query[:range]
-    return movies
-  end
-
   def review_average
     if self.reviews.any?
       reviews.sum(:rating_out_of_ten)/reviews.size
     else
       return 0
     end
+  end
+
+  def self.search(query) 
+    movies = self.where("lower(title) LIKE ?", "%#{query[:title]}%").where("lower(director) LIKE ?", "%#{query[:director]}%")
+    movies = self.where(runtime_in_minutes: query[:range]) if query[:range]
+    return movies
   end
 
   protected

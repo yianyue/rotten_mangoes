@@ -17,7 +17,6 @@ RottenMangoes::Application.routes.draw do
     get 'become_admin', to: 'admin#become_admin'
     # does it make sense to name space the switch?
   end
-
     
   root to: 'movies#index'
   

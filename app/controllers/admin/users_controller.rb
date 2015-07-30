@@ -1,8 +1,7 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < Admin::BaseController
     # what about inhereting from UsersController? Wouldn't be super useful, since only new is the same
 
-    before_action :admin_access
 
     def index
       @users = User.page(params[:page]).per(10)
@@ -44,6 +43,15 @@ module Admin
       UserMailer.delete_email(@user).deliver_later
       @user.destroy
       redirect_to admin_users_path
+    end
+
+  # is this the right place to put become_user?
+  # TODO: create Admin::BaseController
+
+    def become_user
+      # return unless current_user.admin
+      session[:mock_id] = params[:id]
+      redirect_to root_url
     end
 
     protected

@@ -1,2 +1,5 @@
 <h1>Edit User Info</h1>
-<%= render 'form' %>
+<%= form_for @user do |f| %>
+  <%= render 'form' %>
+  <div><%= f.submit "Update" %></div>
+<% end %>

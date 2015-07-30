@@ -13,7 +13,7 @@ RottenMangoes::Application.routes.draw do
 
   namespace :admin do
     resources :users
-    get 'become_user/:id', to: 'admin#become_user', as: 'become_user'
+    get 'become_user/:id', to: 'users#become_user', as: 'become_user'
     # QUESTION: does it make sense to name space the become_user?
   end
     

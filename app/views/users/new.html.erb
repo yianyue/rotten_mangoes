@@ -1,13 +1,5 @@
 <h1>Register new user</h1>
-<% if @user.errors.any? %>
-  <div>
-    <%= pluralize(@user.errors.count, "error") %> prevented the account from being created:
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+<%= form_for @user do |f| %>
+  <%= render 'form' %>
+  <div><%= f.submit "Submit" %></div>
 <% end %>
-
-<%= render 'form' %>

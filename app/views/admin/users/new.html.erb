@@ -1,5 +1,5 @@
 <h1>Admin: Create a new user</h1>
-<%= form_for @user do |form| %>
+<%= form_for [:admin, @user] do |form| %>
   <%= render partial: 'users/form', locals: {form: form} %>
   <div><%= form.check_box :admin %> Admin</div>
   <div><%= form.submit "Submit" %></div>

@@ -43,12 +43,12 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_path
   end
 
-# is this the right place to put become_user?
+  # is this the right place to put become_user?
 
-def become_user
-  session[:mock_id] = params[:id]
-  redirect_to root_url
-end
+  def become_user
+    session[:mock_id] = params[:id]
+    redirect_to root_url
+  end
 
   protected
 

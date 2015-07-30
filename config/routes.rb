@@ -14,8 +14,7 @@ RottenMangoes::Application.routes.draw do
   namespace :admin do
     resources :users
     get 'become_user/:id', to: 'admin#become_user', as: 'become_user'
-    get 'become_admin', to: 'admin#become_admin'
-    # does it make sense to name space the switch?
+    # QUESTION: does it make sense to name space the become_user?
   end
     
   root to: 'movies#index'

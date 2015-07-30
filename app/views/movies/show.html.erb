@@ -7,19 +7,21 @@
 <%= link_to "delete", movie_path(@movie), method: :delete,  data: {confirm: "Are you sure?"} %>)</h2>
 <%= @movie.review_average %>/10
 
-<h2><%= link_to "add review", new_movie_review_path(@movie) %>
 <h3><%= formatted_date(@movie.release_date) %></h3>
 <h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
 <p><%= @movie.description %></p>
 
+<hr />
+
 <h3>Reviews of <em><%= @movie.title %></em></h3>
 <% if current_user %>
+  <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
   <% @movie.reviews.each do |review| %>
     <p><%= review.text %></p>
     <p><%= review.rating_out_of_ten %>/10</p>
     <small>- <%= review.user.email %></small><br/>
+    <hr />
   <% end %>
-  <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
 <% else %>
   <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
 <% end %>

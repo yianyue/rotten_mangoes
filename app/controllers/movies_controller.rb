@@ -18,9 +18,8 @@ class MoviesController < ApplicationController
 
     keyword = params[:keyword]
     runtime = params[:runtime] || ""
-    min_runtime = runtime.split("..")[0]
-    max_runtime = runtime.split("..")[1]
-
+    min_runtime, max_runtime = runtime.split("-")
+    
     @movies = Movie
     @movies = @movies.title_or_director_like(params[:keyword]) unless keyword.blank?
 

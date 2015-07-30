@@ -3,6 +3,6 @@
   <%= text_field_tag(:keyword) %>
   <%= label_tag "Runtime:" %>
   <%= select_tag(:runtime, options_for_select(
-  [["All runtime", ""], ["Under 90 minutes", "..90"], ["Between 90 and 120 minutes", "90..120"], ["Over 120 minutes", "120.."]])) %>
+  [["All runtime", ""], ["Under 90 minutes", "-90"], ["Between 90 and 120 minutes", "90-120"], ["Over 120 minutes", "120-"]])) %>
   <%= submit_tag("Search") %>
 <% end %>

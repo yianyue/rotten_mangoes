@@ -10,7 +10,8 @@ class Movie < ActiveRecord::Base
   validate :release_date_is_in_the_future
 
   scope :title_or_director_like, -> (keyword){ where("title LIKE ? OR director LIKE ?", "%#{keyword}%", "%#{keyword}%") }
-  scope :runtime_between, -> (range) { where(runtime_in_minutes: range) }
+  
+  # scope :runtime_between, -> (range) { where(runtime_in_minutes: range) }
   
   scope :runtime_less_than, -> (max){ where("runtime_in_minutes < ?", max) }
   scope :runtime_greater_than_or_eq_to, -> (min){ where("runtime_in_minutes >= ?", min) }
@@ -22,12 +23,6 @@ class Movie < ActiveRecord::Base
       return 0
     end
   end
-
-  # def self.search(query) 
-  #   movies = self.where("lower(title) LIKE ? OR lower(director) LIKE ?", "%#{query[:keyword]}%", "%#{query[:keyword]}%")
-  #   movies = movies.where(runtime_in_minutes: query[:range]) if query[:range]
-  #   return movies
-  # end
 
   protected
 

@@ -4,32 +4,43 @@ class MoviesController < ApplicationController
   skip_before_action :restrict_access, only: [:index, :show, :search]
 
   def index
-    @movies = Movie.all
-  end
+        
+    # case params[:runtime].to_i
+    # when 1
+    #   range = 0..89
+    # when 2
+    #   range = 90..120
+    # when 3
+    #   range = 121..1000
+    # else
+    #   range = nil
+    # end
 
-  def search
-    case params[:runtime].to_i
-    when 0
-      range = nil
-    when 1
-      range = 0...90
-    when 2
-      range = 90..120
-    when 3
-      range = 121..1000
-      # TODO:
+    keyword = params[:keyword]
+    runtime = params[:runtime] || ""
+    min_runtime = runtime.split("..")[0]
+    max_runtime = runtime.split("..")[1]
+
+    @movies = Movie
+    @movies = @movies.title_or_director_like(params[:keyword]) unless keyword.blank?
+
+    # This feels more fragile
+    @movies = @movies.runtime_less_than(max_runtime.to_i) unless max_runtime.blank?
+    @movies = @movies.runtime_greater_than_or_eq_to(min_runtime.to_i) unless min_runtime.blank?
+
+    # @movies = @movies.runtime_between(range) if range
+
+
+    if keyword.present? || runtime.present?
+      if @movies.any?
+        flash.now.alert = "found #{@movies.size} movies"
+      else
+        flash.now.alert = "cannot find any movies with the given criteria"
+      end
     end
-    query = {keyword: params[:keyword], range: range}
 
-    @movies = Movie.search(query)
+    @movies = @movies.all
 
-    if @movies.any?
-      flash.now.alert = "found #{@movies.size} movies"
-      # why doesn't notice work here?
-      render :index
-    else
-      redirect_to movies_path, notice: "cannot find any movies with the given criteria"
-    end
   end
 
   def show

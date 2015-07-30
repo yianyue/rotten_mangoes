@@ -1,7 +1,8 @@
-<%= form_tag search_movies_path, method: :get do %>
+<%= form_tag movies_path, method: :get do %>
   <%= label_tag "Search by title & director:" %>
   <%= text_field_tag(:keyword) %>
+  <%= label_tag "Runtime:" %>
   <%= select_tag(:runtime, options_for_select(
-  [["", 0], ["Under 90 minutes", 1], ["Between 90 and 120 minutes", 2], ["Over 120 minutes", 3]])) %>
+  [["All runtime", ""], ["Under 90 minutes", "..90"], ["Between 90 and 120 minutes", "90..120"], ["Over 120 minutes", "120.."]])) %>
   <%= submit_tag("Search") %>
 <% end %>

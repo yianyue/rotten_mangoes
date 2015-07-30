@@ -2,9 +2,6 @@ RottenMangoes::Application.routes.draw do
 
   resources :movies do
     resources :reviews, only: [:new, :create]
-    collection do
-      get 'search'
-    end
   end
   
   resources :users, only: [:new, :create]
@@ -14,7 +11,6 @@ RottenMangoes::Application.routes.draw do
   namespace :admin do
     resources :users
     get 'become_user/:id', to: 'users#become_user', as: 'become_user'
-    # QUESTION: does it make sense to name space the become_user?
   end
     
   root to: 'movies#index'

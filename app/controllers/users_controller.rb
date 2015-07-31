@@ -15,9 +15,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @reviews = @user.reviews.includes(:movie)
-    # breaks when id not found
+    # find raises an exception when id is invalid. find_by returns nil
+    @user = User.find_by(id: params[:id])
+    if @user
+      @reviews = @user.reviews.includes(:movie)
+    else
+      redirect_to root_path, notice: "User not found"
+    end
   end
 
   protected

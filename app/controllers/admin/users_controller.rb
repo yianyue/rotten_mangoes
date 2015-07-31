@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-  # what about inhereting from UsersController? Wouldn't be super useful, since only new is the same
+  # what about inhereting from UsersController?
 
   def index
     @users = User.page(params[:page]).per(10)
@@ -19,7 +19,12 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    if @user
+      @reviews = @user.reviews.includes(:movie)
+    else
+      redirect_to root_path, notice: "User not found"
+    end
   end
 
   def edit
@@ -37,13 +42,13 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
     @user = User.find(params[:id])
-    # Tell the UserMailer to send a welcome email after save
+    # Tell the UserMailer to send a delete email
     UserMailer.delete_email(@user).deliver_later
     @user.destroy
     redirect_to admin_users_path
   end
 
-  # is this the right place to put become_user?
+  # QUESTION: is this the right place to put become_user?
 
   def become_user
     session[:mock_id] = params[:id]

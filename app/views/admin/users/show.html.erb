@@ -1,5 +1,14 @@
-<%= link_to "User List", admin_users_path %>
+<%= link_to "Back to User List", admin_users_path %>
 <h2><%= @user.full_name %></h2>
-<p><%= @user.email %></p>
 <%= link_to "edit", edit_admin_user_path(@user) %>, 
 <%= link_to "delete", admin_user_path(@user), method: :delete,  data: {confirm: "You sure?"} %>
+<p>Admin: <%= @user.admin %>
+<p>email: <%= @user.email %></p>
+<p>created at: <%= formatted_date(@user.created_at) %> update at: <%= formatted_date(@user.updated_at) %></p>
+
+<hr />
+
+<h3>Reviews by <em><%= @user.full_name %></em></h3>
+<% @reviews.each do |review| %>
+  <%= render partial: 'reviews/review', locals: { review: review } %>
+<% end %>

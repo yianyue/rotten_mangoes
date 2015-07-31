@@ -38,7 +38,8 @@ class MoviesController < ApplicationController
       end
     end
 
-    @movies = @movies.all
+    @movies = @movies.all.page(params[:page]).per(12)
+
 
   end
 

@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::BaseController
   # what about inhereting from UsersController?
 
   def index
-    @users = User.page(params[:page]).per(25)
+    @users = User.page(params[:page]).per(10)
   end
 
   def new

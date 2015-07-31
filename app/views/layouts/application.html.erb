@@ -15,6 +15,7 @@
           <%= render 'movies/search' %>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Add a New Movie", new_movie_path %></li>
+            <% if current_admin? %><li><%= link_to "Add a New User", new_admin_user_path %></li><% end %>
           </ul>
         </nav>
       </div>

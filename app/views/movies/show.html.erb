@@ -1,15 +1,17 @@
-<%= link_to "Back to all movies", movies_path %><br/>
-
 <div class="row">
   <div class="col-xs-6">
-  <%= image_tag @movie.image_url(:thumb) if @movie.image? %>
-  <%= image_tag(@movie.poster_image_url, class: "full-size") %>
+  <% if @movie.poster_image_url.blank? %>
+    <%= image_tag "https://s-media-cache-ak0.pinimg.com/736x/72/24/f6/7224f6d53614cedbf8cef516b705a555.jpg" %>
+  <% else %>
+    <%= image_tag @movie.poster_image_url %>
+  <% end %>
   </div>
 
   <div class="col-xs-6">
-  <h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, 
-  <%= link_to "delete", movie_path(@movie), method: :delete,  data: {confirm: "Are you sure?"} %>)</h2>
-  <%= @movie.review_average %>/10
+  <h2><%= @movie.title %></h2>
+  <p><%= link_to "edit", edit_movie_path(@movie), class: "btn btn-default btn-block" %> 
+  <%= link_to "delete", movie_path(@movie), method: :delete, class: "btn btn-default btn-block",  data: {confirm: "Are you sure?"} %></p>
+  <p>Rating: <%= @movie.review_average %>/10</p>
   <h3><%= formatted_date(@movie.release_date) %></h3>
   <h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
   <p><%= @movie.description %></p>

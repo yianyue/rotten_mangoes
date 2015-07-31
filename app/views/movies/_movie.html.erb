@@ -1,10 +1,13 @@
 <div class="col-xs-6 col-sm-3">
 <div class=" poster-thumbnail">
+<% if movie.poster_image_url.blank? %>
+  <%= image_tag "https://s-media-cache-ak0.pinimg.com/736x/72/24/f6/7224f6d53614cedbf8cef516b705a555.jpg", class: 'img-responsive' %>
+<% else %>
   <%= image_tag movie.poster_image_url, class: 'img-responsive' %>
-  <%= image_tag movie.image_url(:thumb, class: 'img-responsive') if movie.image? %>
-  <%= image_tag "https://s-media-cache-ak0.pinimg.com/736x/72/24/f6/7224f6d53614cedbf8cef516b705a555.jpg", class: 'img-responsive' if movie.poster_image_url.blank?%>
+<% end %>
+  <!-- <%= image_tag movie.image_url(:thumb, class: 'img-responsive') if movie.image? %> -->
   <div class="poster-caption">
-    <h3><%= link_to movie.title, movie_path(movie) %></h3>
+    <h3><em><%= link_to movie.title, movie_path(movie) %></em></h3>
     <h4><%= formatted_date(movie.release_date) %></h4>
     <h5>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h5>
     <p><%= movie.description %></p>

@@ -15,13 +15,37 @@ $primary-yellow: #FFBF40;
 $primary-brown: #422910;
 $primary-light: #FFF;
 
-$body-bg:   $primary-yellow !default;
+$brand-primary:  darken(#428bca, 6.5%);
+$brand-success: #5cb85c;
+$brand-info:    #5bc0de;
+$brand-warning: #f0ad4e;
+$brand-danger:  #d9534f;
+
+/*$gray-darker:  lighten(#000, 13.5%); // #222
+$gray-dark:    lighten(#000, 20%);   // #333
+$gray:         lighten(#000, 33.5%); // #555
+$gray-light:   lighten(#000, 46.7%); // #777
+$gray-lighter: lighten(#000, 93.5%); // #eee
+*/
+
+$body-bg:   $primary-yellow;
 $text-color: $primary-brown !default;
+
 $link-color: $primary-light !default;
 $link-hover-color: darken($link-color, 15%);
 $link-hover-decoration: none;
+
 $thumbnail-border: none;
 $thumbnail-hover-bg: rgba(29, 106, 154, 0.72);
+
+$pagination-bg: #222;
+/*same color as the inverse nav bg*/
+$pagination-border: $primary-yellow;
+$pagination-hover-bg: $primary-brown;
+$pagination-hover-border: $primary-yellow;
+
+$table-bg-hover: lighten($primary-brown, 25%);
+$table-border-color: lighten($primary-brown, 25%);
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -31,12 +55,13 @@ body {
   padding-bottom: 70px;
 }
 
-img.full-size {
-  height: 500px;
+img {
+  @extend .img-responsive;
 }
 
 .poster-thumbnail {
   position: relative;
+  margin: 5px;
 }
 
 .poster-caption {
@@ -45,14 +70,12 @@ img.full-size {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba($primary-brown, 0.5);
+  background: rgba($primary-brown, 0.75);
   color: $primary-light;
   visibility: hidden;
   opacity: 0;
   padding: 1em;
-  /*remove comment if you want a gradual transition between states
-  -webkit-transition: visibility opacity 0.2s;
-  */
+  -webkit-transition: visibility opacity 0.2s; 
 }
 
 .poster-thumbnail:hover .poster-caption {

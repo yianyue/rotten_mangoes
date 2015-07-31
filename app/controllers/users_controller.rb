@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     # find raises an exception when id is invalid. find_by returns nil
     @user = User.find_by(id: params[:id])
+    # @user = User.try('find(params[:id])') => works the same as the previous line
     if @user
       @reviews = @user.reviews.includes(:movie)
     else

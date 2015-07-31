@@ -1,27 +1,32 @@
 <%= link_to "Back to all movies", movies_path %><br/>
 
-<%= image_tag @movie.image_url(:thumb) if @movie.image? %>
-<%= image_tag(@movie.poster_image_url) %>
+<div class="row">
+  <div class="col-xs-6">
+  <%= image_tag @movie.image_url(:thumb) if @movie.image? %>
+  <%= image_tag(@movie.poster_image_url, class: "full-size") %>
+  </div>
 
-<h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, 
-<%= link_to "delete", movie_path(@movie), method: :delete,  data: {confirm: "Are you sure?"} %>)</h2>
-<%= @movie.review_average %>/10
+  <div class="col-xs-6">
+  <h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, 
+  <%= link_to "delete", movie_path(@movie), method: :delete,  data: {confirm: "Are you sure?"} %>)</h2>
+  <%= @movie.review_average %>/10
+  <h3><%= formatted_date(@movie.release_date) %></h3>
+  <h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
+  <p><%= @movie.description %></p>
+  </div>
+</div>
 
-<h3><%= formatted_date(@movie.release_date) %></h3>
-<h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
-<p><%= @movie.description %></p>
-
-<hr />
-
-<h3>Reviews of <em><%= @movie.title %></em></h3>
-<% if current_user %>
-  <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
-  <% @movie.reviews.each do |review| %>
-    <p><%= review.text %></p>
-    <p><%= review.rating_out_of_ten %>/10</p>
-    <small>- <%= link_to review.user.full_name, user_path(review.user) %></small><br/>
-    <hr />
+<div class="row">
+  <h3>Reviews of <em><%= @movie.title %></em></h3>
+  <% if current_user %>
+    <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
+    <% @movie.reviews.each do |review| %>
+      <p><%= review.text %></p>
+      <p><%= review.rating_out_of_ten %>/10</p>
+      <small>- <%= link_to review.user.full_name, user_path(review.user) %></small><br/>
+      <hr />
+    <% end %>
+  <% else %>
+    <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
   <% end %>
-<% else %>
-  <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
-<% end %>
+</div>

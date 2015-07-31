@@ -44,6 +44,9 @@ gem "carrierwave"
 # Use Kaminari for pagination
 gem 'kaminari'
 
+# Use bootstrap for css
+gem 'bootstrap-sass'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

@@ -10,6 +10,19 @@
  *
 */
 
+/*colors*/
+$primary-yellow: #FFBF40;
+$primary-brown: #422910;
+$primary-light: #FFF;
+
+$body-bg:   $primary-yellow !default;
+$text-color: $primary-brown !default;
+$link-color: $primary-light !default;
+$link-hover-color: darken($link-color, 15%);
+$link-hover-decoration: none;
+$thumbnail-border: none;
+$thumbnail-hover-bg: rgba(29, 106, 154, 0.72);
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -18,10 +31,31 @@ body {
   padding-bottom: 70px;
 }
 
-img.thumb-size {
-    height: 250px;
+img.full-size {
+  height: 500px;
 }
 
-img.full-size {
-    height: 500px;
+.poster-thumbnail {
+  position: relative;
+}
+
+.poster-caption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba($primary-brown, 0.5);
+  color: $primary-light;
+  visibility: hidden;
+  opacity: 0;
+  padding: 1em;
+  /*remove comment if you want a gradual transition between states
+  -webkit-transition: visibility opacity 0.2s;
+  */
+}
+
+.poster-thumbnail:hover .poster-caption {
+  visibility: visible;
+  opacity: 1;
 }

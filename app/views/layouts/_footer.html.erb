@@ -1,12 +1,12 @@
-<footer>
-  <small>
-    <% if current_user %>
-      Signed in as <%= current_user.full_name %> | <%= link_to "Log out", session_path(:current), method: :delete %>
-      <% if current_admin? %>
-        | <%= link_to "See All Users", admin_users_path %>
-      <% end %>
-    <% else %>
-      <%= link_to "Log In", new_session_path %> | <%= link_to "Sign Up", new_user_path %>
-    <% end %>
-  </small>
-</footer>
+<ul class="nav navbar-nav navbar-right">
+<% if current_user %>
+  <p class="navbar-text">Signed in as <%=link_to current_user.full_name, user_path(current_user), class: "navbar-link" %></p>
+  <% if current_admin? %>
+    <li><%= link_to "All Users", admin_users_path %></li>
+  <% end %>
+  <li><%= link_to "Log out", session_path(:current), method: :delete %></li>
+<% else %>
+  <li><%= link_to "Log In", new_session_path %></li>
+  <li><%= link_to "Sign Up", new_user_path %></li>
+<% end %>
+</ul>

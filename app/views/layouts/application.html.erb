@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RottenMangoes</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div id="main-container" class="container-fluid">
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value) %>
-    <% end %>
+  <head>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <title>RottenMangoes</title>
+  </head>
 
-    <%= yield %>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav>
+          <%= link_to "Rotten Mangoes", root_path, class: "navbar-brand" %>
+          <%= render 'search' %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Add a New Movie", new_movie_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <%= render 'layouts/footer' %>
-  </div>
-</body>
+    <div id="main-container" class="container">      
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value) %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+    
+    <footer class="navbar navbar-default navbar-fixed-bottom">
+      <div class='container'>
+        <%= render 'layouts/footer' %>
+      </div>
+    </footer>
+  </body>
+
 </html>

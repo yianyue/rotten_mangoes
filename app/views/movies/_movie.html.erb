@@ -1,8 +1,9 @@
-<%= link_to image_tag(movie.poster_image_url), movie_path(movie) %>
-<%= image_tag movie.image_url(:thumb) if movie.image? %>
+<div class="col-xs-6 col-sm-3">
+  <%= image_tag(movie.poster_image_url, class: "thumb-size") %>
+  <%= image_tag movie.image_url(:thumb) if movie.image? %>
 
-<h2><%= link_to movie.title, movie_path(movie) %></h2>
-<h3><%= formatted_date(movie.release_date) %></h3>
-<h4>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h4>
-<p><%= movie.description %></p>
-<hr>
+  <h3><%= link_to movie.title, movie_path(movie) %></h3>
+  <h4><%= formatted_date(movie.release_date) %></h4>
+  <h5>Dir. <%= movie.director %> | <%= movie.runtime_in_minutes %> minutes</h5>
+  <p><%= movie.description %></p>
+</div>
